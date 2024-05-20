@@ -1,24 +1,16 @@
-image: Ubuntu1804  # образ для сборки
+version: 1.0.{build}
+image: Visual Studio 2019
 
-stack: node 16  # окружение
-
-branches:
-  only:
-    - main  # ветка git
-
-cache: node_modules  # кеширование
+environment:
+  nodejs_version: '18.12.0'
 
 install:
-  - yarn install  # команда установки зависимостей
-
-build: off  # отключаем встроенную в appveyor систему сборки
+  - ps: Install-Product node $env:nodejs_version
+  - node -v
+  - npm -v
+  - yarn install
 
 build_script:
-  - yarn run build   # команда сборки
-
-deploy_script:  # скрипт развёртывания
-  - git config --global credential.helper store
-  - git config --global user.name AppVeyor
-  - git config --global user.email ci@appveyor.com
-  - echo "https://$EVENTS1_TOKEN:x-oauth-basic@github.com" > "$HOME/.git-credentials"
-  - npx push-dir --dir=dist --branch=gh-pages --force --verbose
+  - echo Build started
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - yarn install
