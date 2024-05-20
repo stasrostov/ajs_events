@@ -35,7 +35,8 @@
     "webpack-merge": "^5.10.0"
   },
   "dependencies": {
-    "core-js": "^3.35.0"
+    "core-js": "^3.35.0",
+    "push-dir": "0.4.1"
   },
   "repository": "https://github.com/stasrostov/ajs_events.git",
   "author": "stasrostov"
